@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FFF7F7F7"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/statusLayout"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+                <com.example.sunbolin.mytestapplication.VoiceLoadingView
+                    android:id="@+id/loading1"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="16dp" />
+
+                <TextView
+                    android:id="@+id/statusText"
+                    android:textSize="13sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <com.example.sunbolin.mytestapplication.VoiceLoadingView
+                    android:id="@+id/loading2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="16dp" />
+
+        </LinearLayout>
+
+        <com.example.sunbolin.mytestapplication.ChatPressSpeakPlayView
+            android:layout_gravity="center"
+            android:id="@+id/pressSpeakView"
+            android:layout_marginTop="20dp"
+            android:layout_width="120dp"
+            android:background="#FFF7F7F7"
+            android:layout_marginBottom="40dp"
+            android:layout_height="120dp"/>
+
+</LinearLayout>
