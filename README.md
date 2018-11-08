@@ -1,5 +1,5 @@
 # MoMoSendVoicePlay
-一款仿陌陌App聊天发送语音的效果
+仿陌陌App聊天发送语音的效果
 
 预览：
 
