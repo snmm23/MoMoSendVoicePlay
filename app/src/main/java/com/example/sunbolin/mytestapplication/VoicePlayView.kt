@@ -1,4 +1,4 @@
-package
+package com.example.sunbolin.mytestapplication
 
 import android.animation.ValueAnimator
 import android.content.Context
