@@ -1,4 +1,4 @@
-package com.ugirls.ui.view
+package 
 
 import android.animation.ValueAnimator
 import android.content.Context
