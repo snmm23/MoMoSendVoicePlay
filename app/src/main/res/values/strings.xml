@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyTestApplication</string>
+    <string name="app_name">MoMoRecordVoiceDemo</string>
     <string name="voice_play_too_short">录制时间过短</string>
     <string name="voice_up_slide_cancel">上滑取消</string>
     <string name="voice_release_cancel">松开取消</string>

@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-                <com.example.sunbolin.mytestapplication.VoiceLoadingView
+                <com.sbl.recordvoice.view.line.LinePlayView
                     android:id="@+id/loading1"
                     android:layout_marginRight="20dp"
                     android:layout_width="40dp"
@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <com.example.sunbolin.mytestapplication.VoiceLoadingView
+                <com.sbl.recordvoice.view.line.LinePlayView
                     android:id="@+id/loading2"
                     android:layout_marginLeft="20dp"
                     android:layout_width="40dp"
@@ -35,12 +35,11 @@
 
         </LinearLayout>
 
-        <com.example.sunbolin.mytestapplication.ChatPressSpeakPlayView
+        <com.sbl.recordvoice.view.center.RecordVoiceControlView
             android:layout_gravity="center"
-            android:id="@+id/pressSpeakView"
+            android:id="@+id/controlView"
             android:layout_marginTop="20dp"
             android:layout_width="120dp"
-            android:background="#FFF7F7F7"
             android:layout_marginBottom="40dp"
             android:layout_height="120dp"/>
 
