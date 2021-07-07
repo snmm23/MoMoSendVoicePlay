@@ -31,6 +31,15 @@ class RecordVoiceControlView : View {
         private const val TAG = "CenterVoiceControlView"
     }
 
+    //正常未按下颜色
+    private val normalColor = ContextCompat.getColor(context, R.color.blue_48B5ED)
+
+    //按下的颜色
+    private val pressHoldColor = ContextCompat.getColor(context, R.color.pink_FF4081)
+
+    //时间过短的颜色
+    private val tooShortColor = ContextCompat.getColor(context, R.color.yellow_FFE1B24A)
+
     //总计时时长(毫秒)
     private val totalRecordTime: Long = 60000
 
@@ -54,9 +63,6 @@ class RecordVoiceControlView : View {
 
     //进度条最大值
     private var maxNum = 0f
-
-    //进度条圆弧颜色
-    private var progressColor = 0
 
     //背景圆弧的起始角度
     private var startAngle = 0f
@@ -182,7 +188,6 @@ class RecordVoiceControlView : View {
      * 初始化
      */
     init {
-        progressColor = ContextCompat.getColor(context, R.color.blue_48B5ED)
         startAngle = -90f
         sweepAngle = 360f
         barWidth = dip2px(context, 4f).toFloat()
@@ -191,7 +196,7 @@ class RecordVoiceControlView : View {
         mProgressRectF = RectF()
         progressPaint = Paint().apply {
             style = Paint.Style.STROKE //只描边，不填充
-            color = progressColor
+            color = normalColor
             isAntiAlias = true //设置抗锯齿
             strokeWidth = barWidth
             strokeCap = Paint.Cap.ROUND //设置画笔为圆角
@@ -207,7 +212,7 @@ class RecordVoiceControlView : View {
         tooShortBGPaint = Paint().apply {
             isAntiAlias = true
             style = Paint.Style.FILL
-            color = ContextCompat.getColor(context, R.color.yellow_FFE1B24A)
+            color = tooShortColor
         }
     }
 
@@ -244,18 +249,8 @@ class RecordVoiceControlView : View {
             canvas.drawArc(mProgressRectF!!, startAngle, progressSweepAngle, false, progressPaint!!)
 
             if (isCancelable) {
-                setProgressColor(
-                    ContextCompat.getColor(
-                        context,
-                        R.color.pink_FF4081
-                    )
-                )
-                textStatusListener?.setStatusTextColor(
-                    ContextCompat.getColor(
-                        context,
-                        R.color.pink_FF4081
-                    )
-                )
+                setProgressColor(pressHoldColor)
+                textStatusListener?.setStatusTextColor(pressHoldColor)
                 textStatusListener?.setStatusTextFirst(context.resources.getString(R.string.voice_release_cancel))
 
                 val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_voice_delete)
@@ -265,18 +260,8 @@ class RecordVoiceControlView : View {
 
             } else {
                 if (nowPosition < prepareSendRecordTime) {
-                    setProgressColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.blue_48B5ED
-                        )
-                    )
-                    textStatusListener?.setStatusTextColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.blue_48B5ED
-                        )
-                    )
+                    setProgressColor(normalColor)
+                    textStatusListener?.setStatusTextColor(normalColor)
                 }
                 textStatusListener?.setStatusTextFirst(context.resources.getString(R.string.voice_up_slide_cancel))
             }
@@ -357,20 +342,11 @@ class RecordVoiceControlView : View {
                 textStatusListener?.setStatusTextTime((nowPosition / 1000).toInt())
 
                 if (nowPosition >= prepareSendRecordTime) {
-                    setProgressColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.pink_FF4081
-                        )
-                    )
-                    textStatusListener?.setStatusTextColor(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.pink_FF4081
-                        )
-                    )
+                    setProgressColor(pressHoldColor)
+                    textStatusListener?.setStatusTextColor(pressHoldColor)
                 }
                 setProgressNum(nowPosition.toFloat())
+
                 if (nowPosition >= totalRecordTime) {
                     isFullFinish = true
                     isCancelable = false
@@ -397,12 +373,7 @@ class RecordVoiceControlView : View {
 
         if (isTooShort) {
             Log.e(TAG, "时间过短, 取消发送")
-            textStatusListener?.setStatusTextColor(
-                ContextCompat.getColor(
-                    context,
-                    R.color.yellow_FFE1B24A
-                )
-            )
+            textStatusListener?.setStatusTextColor(tooShortColor)
             textStatusListener?.setStatusTextShort(context.resources.getString(R.string.voice_play_too_short))
             recordStatusListener?.cancelRecord("时间过短, 取消发送")
 
@@ -426,8 +397,7 @@ class RecordVoiceControlView : View {
      * 设置进度条颜色
      */
     private fun setProgressColor(color: Int) {
-        this.progressColor = color
-        progressPaint?.color = progressColor
+        progressPaint?.color = color
     }
 
 

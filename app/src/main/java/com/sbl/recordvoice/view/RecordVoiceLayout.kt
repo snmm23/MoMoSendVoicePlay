@@ -84,12 +84,13 @@ class RecordVoiceLayout : LinearLayout, RecordVoiceTextStatusListener {
 
 
     override fun showStatus() {
+        hideAnimator?.cancel()
+        hideAnimator = null
+
         statusLayout.visibility = VISIBLE
         loading1.startAnim()
         loading2.startAnim()
 
-        hideAnimator?.cancel()
-        hideAnimator = null
         showAnimator = ObjectAnimator.ofFloat(statusLayout, "alpha", 0f, 1f).apply {
             duration = 1000
             start()
