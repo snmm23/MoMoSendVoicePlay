@@ -31,6 +31,9 @@ class RecordVoiceControlView : View {
         private const val TAG = "CenterVoiceControlView"
     }
 
+    //control背景颜色
+    private val controlBGColor = ContextCompat.getColor(context, R.color.white)
+
     //正常未按下颜色
     private val normalColor = ContextCompat.getColor(context, R.color.blue_48B5ED)
 
@@ -204,6 +207,7 @@ class RecordVoiceControlView : View {
 
         bgPaint = Paint().apply {
             isAntiAlias = true
+            color = controlBGColor
             style = Paint.Style.FILL //设置背景为填充
         }
 
@@ -242,10 +246,11 @@ class RecordVoiceControlView : View {
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        bgPaint!!.color = ContextCompat.getColor(context, R.color.white)
+        //绘制背景
         canvas.drawCircle((mWidth / 2).toFloat(), (mHeight / 2).toFloat(), mRadius, bgPaint!!)
 
         if (isPressHold) {
+            //绘制进度条
             canvas.drawArc(mProgressRectF!!, startAngle, progressSweepAngle, false, progressPaint!!)
 
             if (isCancelable) {
@@ -272,6 +277,7 @@ class RecordVoiceControlView : View {
             canvas.drawBitmap(bitmap, bitmapCenterToLeft, bitmapCenterToTop, imagePaint)
         }
 
+        //绘制时间过短背景
         tooShortBGPaint!!.alpha = tooShortAlphaIndex
         canvas.drawCircle(
             (mWidth / 2).toFloat(),
